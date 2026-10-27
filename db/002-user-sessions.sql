@@ -1,14 +1,26 @@
 CREATE TABLE user_sessions(
-    -- Session id to be used in dashboards and reference
-    session_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL
-    session_start DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--Sessions id to be used in dashboards and references--
+  
+  sessions_id  INT AUTO_INCREMENT PRIMARY KEY,
+
+  --user ID reference
+  user_id INT NOT NULL,
+
+
+  --session attributes
+   session_start DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     session_end DATETIME DEFAULT NULL,
     session_duration INT DEFAULT NULL,
 
-    CONTSTRAINT fk_user_sessions_user_id
-        FOREIGN KEY (user_id)
-        REFERENCES users(user_id)
+ --constraints and foreign key implementation
+    CONSTRAINT fk_user_sessions_user_id 
+        FOREIGN KEY (user_id) 
+        REFERENCES users(user_id) 
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+
+
+
+
+
