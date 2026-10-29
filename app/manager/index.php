@@ -418,6 +418,42 @@ if($section==='borrow' && $action==='return'){
     exit;
 }
 
+if ($section === 'activity-logs') {
+
+// Activity Logs Query #3
+$stmt = $pdo->query("
+    SELECT * 
+    FROM activity_logs
+    ORDER BY activity_log_created_at DESC
+");
+
+$activities = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
+elseif ($section === 'user-sessions') {
+
+
+// User Sessions Query
+    $stmt = $pdo->query("
+        SELECT
+            us.sessions_id,
+            us.user_id,
+            u.user_username,
+            u.user_email,
+            u.user_role,
+            us.session_start,
+            us.session_end,
+            us.session_duration
+        FROM user_sessions us
+        INNER JOIN users u
+            ON us.user_id = u.user_id
+        ORDER BY us.session_start DESC
+    ");
+
+    $sessions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+}
 
 ?>
 
